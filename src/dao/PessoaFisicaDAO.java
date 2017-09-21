@@ -45,7 +45,7 @@ public class PessoaFisicaDAO {
 		PessoaFisica pf = new PessoaFisica();
 		PreparedStatement estrutura = null;
 		estrutura = con.prepareStatement
-				("SELECT * FROM Pessoa WHERE id = ?");
+				("SELECT nome, email, telefone, cpf, rg, data_nascimento FROM Pessoa WHERE id = ?");
 		estrutura.setInt (1,n);
 		ResultSet resultado = estrutura.executeQuery();							
 		if(resultado.next()) {

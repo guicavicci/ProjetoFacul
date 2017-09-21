@@ -53,9 +53,10 @@ public class CentroCustoDAO {
         return i;
     }
 
-    public int mudarArea(int num)throws Exception{
+    public int mudarArea(String area, int cod)throws Exception{
         PreparedStatement estrutura = con.prepareStatement("UPDATE Centro_custo SET nome_area=? WHERE codigo=?");
-        estrutura.setInt(1,  num);
+        estrutura.setString(1, area);
+        estrutura.setInt(2,  cod);
         int x = estrutura.executeUpdate();
         estrutura.close();
         return x;

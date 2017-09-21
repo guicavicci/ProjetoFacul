@@ -40,7 +40,7 @@ public class ClienteDAO {
 		PreparedStatement estrutura = null;
 		estrutura = con.prepareStatement
 				("SELECT numero_instalacao, atualizacao_cadastral, debito_pendente FROM Cliente WHERE numero_instalacao = ?");
-		estrutura.setString (1,ni);
+		estrutura.setString (1, ni);
 		ResultSet resultado = estrutura.executeQuery();							
 		if(resultado.next()) {
 			cliente.setNumeroInstalacao(resultado.getString("numero_instalacao"));
@@ -55,7 +55,7 @@ public class ClienteDAO {
 	}
 	
 	public int deletarCliente(int num) throws Exception {
-		PreparedStatement estrutura = con.prepareStatement("DELETE FROM Pessoa WHERE id = ?");
+		PreparedStatement estrutura = con.prepareStatement("DELETE FROM Cliente WHERE numero_instalacao = ?");
 		estrutura.setInt(1, num);
 		int i = estrutura.executeUpdate();
 		estrutura.close();
@@ -64,16 +64,14 @@ public class ClienteDAO {
 	}
 	
 	
-	public int atualizarCliente (Cliente cliente) throws Exception{
+	public int atualizarCliente (String e, String num) throws Exception{
 		PreparedStatement estrutura = con.prepareStatement
-		("UPDATE Pessoa SET email = ? WHERE NR_CLIENTE =?");
-		estrutura.setString(1, cliente.getDebitoPendente());
-		estrutura.setString(2, cliente.getAtualizacaoCadastral());
+		("UPDATE Pessoa SET email = ? WHERE numero_instalacao =?");
+		estrutura.setString(1, e);
+		estrutura.setString(2, num);
 		int z = estrutura.executeUpdate();
+		estrutura.close();
 		return z;
 	}
 	
-	
-	
-
 }

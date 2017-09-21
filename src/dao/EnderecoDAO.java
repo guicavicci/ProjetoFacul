@@ -40,9 +40,10 @@ public EnderecoDAO() throws Exception {
         return i;
     }
     
-    public int atualizarCidade(String cidade) throws Exception {
-        PreparedStatement estrutura = con.prepareStatement("update PESSOA set cidade = ?");
+    public int atualizarCidade(String cidade, int id) throws Exception {
+        PreparedStatement estrutura = con.prepareStatement("update PESSOA set cidade = ? where id = ?");
         estrutura.setString(1, cidade);
+        estrutura.setInt(2, id);
         int i = estrutura.executeUpdate();
         estrutura.close();
         return i;
@@ -68,24 +69,5 @@ public EnderecoDAO() throws Exception {
 
 	}
     
-    public List<Endereco> listarPorEndereco(String n) throws Exception {
-        List<Endereco> lista = new ArrayList<Endereco>();
-        Endereco obj = null;
-        
-        PreparedStatement estrutura = con.prepareStatement("select * from PESSOA where CEP like ?");
-        estrutura.setString(1, "%" + n + "%");
-        ResultSet resultado = estrutura.executeQuery();
-        while(resultado.next()) {
-            obj = new Endereco();
-            obj.setCep(resultado.getString("cep"));
-            obj.setRua(resultado.getString("rua"));
-            obj.setNumero(resultado.getInt("numero"));
-            obj.setCidade(resultado.getString("cidade"));
-            lista.add(obj);
-        }
-        resultado.close();
-        estrutura.close();
-        return lista;
-    }
 }
 

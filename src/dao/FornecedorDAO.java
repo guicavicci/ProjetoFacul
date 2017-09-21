@@ -44,9 +44,10 @@ public class FornecedorDAO {
 		
 }
 
-	    public int alterarGerente(String gerente) throws Exception {
-	        PreparedStatement estrutura = con.prepareStatement("update Fornecedor set gerente_contrato = ?");
+	    public int alterarGerente(String gerente, String nc) throws Exception {
+	        PreparedStatement estrutura = con.prepareStatement("update Fornecedor set gerente_contrato = ? where numero_contrato = ?");
 	        estrutura.setString(1, gerente);
+	        estrutura.setString(2, nc);
 	        int i = estrutura.executeUpdate();
 	        estrutura.close();
 	        return i;

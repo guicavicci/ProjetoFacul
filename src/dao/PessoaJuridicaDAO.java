@@ -68,9 +68,9 @@ public class PessoaJuridicaDAO {
 
 		}
 	
-		public int delete (int num) throws Exception {
+		public int delete (String c) throws Exception {
 			PreparedStatement estrutura = con.prepareStatement("DELETE FROM Pessoa WHERE cnpj = ?");
-			estrutura.setInt(1, num);
+			estrutura.setString(1, c);
 			int i = estrutura.executeUpdate();
 			estrutura.close();
 			return i;

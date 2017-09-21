@@ -25,7 +25,7 @@ public class FuncionarioDAO {
 	        PreparedStatement estrutura = null;
 	        estrutura = con.prepareStatement
 	                ("INSERT INTO Funcionario "
-	                        + "(codigo, nome_area, gestor) VALUES" 
+	                        + "(numero_matricula, cargo, salario) VALUES" 
 	                        +"(?,?,?)");
 	        estrutura.setInt(1, func.getNumeroMatricula());
 	        estrutura.setString(2, func.getCargo());
@@ -37,7 +37,7 @@ public class FuncionarioDAO {
 	    
 	    public Funcionario getCodigo(int n)throws Exception{
 	    	Funcionario func = new Funcionario();
-	        PreparedStatement estrutura = con.prepareStatement("SELECT * FROM Funcionario WHERE numero_matricula = ?");
+	        PreparedStatement estrutura = con.prepareStatement("SELECT numero_matricula, cargo, salario FROM Funcionario WHERE numero_matricula = ?");
 	        estrutura.setInt(1, n);
 	        ResultSet resultado = estrutura.executeQuery();
 	        if(resultado.next()){
