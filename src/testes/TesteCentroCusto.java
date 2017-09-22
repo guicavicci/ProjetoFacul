@@ -1,15 +1,26 @@
 package testes;
 
 import javax.swing.JOptionPane;
+
 import beans.CentroCusto;
-import dao.CentroCustoDAO;
+import bo.CentroCustoBO;
 
 public class TesteCentroCusto {
+	
+	static String texto (String texto) {
+		return JOptionPane.showInputDialog(texto);
+		
+	}
+	
+	static int textint (String textint) {
+		return Integer.parseInt(JOptionPane.showInputDialog(textint));
+		
+	}
 
     public static void main(String[] args) {
-        CentroCustoDAO dao = null;
+        CentroCustoBO bo = null;
         try{
-            dao = new CentroCustoDAO();
+            bo = new CentroCustoBO();
             do{
                 char op =JOptionPane.showInputDialog
                         ("Escolha uma opção:\n "
@@ -17,41 +28,36 @@ public class TesteCentroCusto {
                                 + "<C> - Consultar\n "
                                 + "<M> - Mudar Area").toUpperCase().charAt(0);
                 if (op=='G'){
-                    dao = new CentroCustoDAO();
+                    bo = new CentroCustoBO();
                     CentroCusto obj = new CentroCusto();
-                    obj.setCodigo(Integer.parseInt(JOptionPane.showInputDialog("Digite o Codigo da area: ")));
-                    obj.setNomeArea(JOptionPane.showInputDialog("Digite o Nome da area: "));
-                    obj.setGestor(JOptionPane.showInputDialog("Digite o Nome do gestor da area: "));
-                    System.out.println(dao.gravar(obj));
+                    obj.setCodigo(textint("Digite o Codigo da area: "));
+                    obj.setNomeArea(texto("Digite o Nome da area: "));
+                    obj.setGestor(texto("Digite o Nome do gestor da area: "));
+                    System.out.println(bo.adicionarNovaArea(obj));
 
                 }else if (op=='C'){
-                    dao = new CentroCustoDAO();
-                    CentroCusto cc = dao.getCodigo(Integer.parseInt(JOptionPane.showInputDialog("Codigo: ")));
+                    bo = new CentroCustoBO();
+                    CentroCusto cc = bo.consultarPorcodigo(textint("Codigo: "));
                     System.out.println("Codigo da area: " + cc.getCodigo());
                     System.out.println("Nome da area: " + cc.getNomeArea());
                     System.out.println("Nome do gestor da area: " + cc.getGestor());
 
 
                 }else if (op=='M'){
-                    dao = new CentroCustoDAO();
-                    int x = dao.mudarArea(Integer.parseInt(JOptionPane.showInputDialog("Digite o codigo: ")));
-                    System.out.println(x + "Area foi(s) foi(ram) atualizado(s)");
+                    bo = new CentroCustoBO();
+                    String x = bo.TrocarArea(texto("Digite a nova area: "),
+                    textint("Digite o codigo: "));
+                    System.out.println(x + "Area foi(s) foi(ram) atualizada(s)");
 
                 }else{
                     System.out.println("Opção inválida!!!");
                 }
             }while(JOptionPane.showConfirmDialog
-                    (null, "Continuar?", "CentroCustoDAO",
+                    (null, "Continuar?", "CentroCustoBO",
                             JOptionPane.YES_NO_OPTION,
                             JOptionPane.QUESTION_MESSAGE)==0);
         }catch(Exception e){
             e.printStackTrace();
-        }finally{
-            try{
-                dao.fechar();
-            }catch(Exception e){
-                e.printStackTrace();
-            }
         }
 
 

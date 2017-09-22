@@ -79,12 +79,6 @@ public class TestePessoaFisica {
                             JOptionPane.QUESTION_MESSAGE)==0);
         }catch(Exception e){
             e.printStackTrace();
-        }finally{
-            try{
-                bo.fecharConexao();;
-            }catch(Exception e){
-                e.printStackTrace();
-            }
         }
 
 

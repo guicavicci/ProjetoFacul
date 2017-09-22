@@ -5,13 +5,6 @@ import dao.PessoaFisicaDAO;
 
 public class PessoaFisicaBO {
 	
-	public static String fecharConexao () throws Exception {
-		PessoaFisicaDAO dao = new PessoaFisicaDAO ();
-		dao.fechar();
-		return "Conexão Fechada";
-		
-		
-	}
     public static String adicionarNovaPessoa(PessoaFisica pf)throws Exception{
         if (pf.getNome().length()>40){
             return "Excedeu a quantidade de caracteres";

@@ -36,9 +36,9 @@ public class CentroCustoBO {
         return objeto;
     }
 
-    public static String trocarEmail(String x, int y) throws Exception {
+    public static String TrocarArea(String x, int y) throws Exception {
     CentroCustoDAO dao = new CentroCustoDAO();
-      String p = dao.MudarArea(x, y);
+      int p = dao.mudarArea(x, y);
       return p + "Linhas atualiadas";
     }
 

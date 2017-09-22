@@ -35,7 +35,7 @@ public class FuncionarioDAO {
 	        return "Gravado com sucesso!";
 	    }
 	    
-	    public Funcionario getCodigo(int n)throws Exception{
+	    public Funcionario getFuncionario(int n)throws Exception{
 	    	Funcionario func = new Funcionario();
 	        PreparedStatement estrutura = con.prepareStatement("SELECT numero_matricula, cargo, salario FROM Funcionario WHERE numero_matricula = ?");
 	        estrutura.setInt(1, n);
@@ -60,7 +60,7 @@ public class FuncionarioDAO {
 	        return i;
 	    }
 	    
-	    public String aumentarSalario(Double s, String nm)throws Exception{
+	    public String upSalario(Double s, String nm)throws Exception{
 	        PreparedStatement estrutura = con.prepareStatement("UPDATE Funcionario SET salario = salario + ?/100*salario WHERE numero_matricula=?");
 	        estrutura.setDouble(1,  s);
 	        estrutura.setString(2, nm);
