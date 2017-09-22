@@ -3,30 +3,57 @@ package bo;
 import beans.CentroCusto;
 import dao.CentroCustoDAO;
 
+
 public class CentroCustoBO {
-    public static String adicionarNovoCliente(CentroCusto cc) throws Exception{
+
+    public static String fecharConexao () throws Exception {
+        CentroCustoDAO dao = new CentroCustoDAO ();
+        dao.fechar();
+        return "Conexao Fechada";
+    }
+    public static String adicionarNovaArea(CentroCusto cc)throws Exception{
         if (cc.getNomeArea().length()>40){
             return "Excedeu a quantidade de caracteres";
-        
         }
-        if(cc.getCodigo()>0){
-            return "Numero inválido";
-    
-        }
+
         CentroCustoDAO dao = new CentroCustoDAO();
+        if (dao.getCodigo(cc.getCodigo()).getCodigo()>0){
+            dao.fechar();
+            return "Este numero ja existe";
+        }
         String x = dao.gravar(cc);
         dao.fechar();
         return x;
     }
 
-    public static CentroCusto consultarPorcodigo(int NumeroCentroCusto) throws Exception{
-        if(NumeroCentroCusto < 1){
+    public static CentroCusto consultarPorcodigo(int pCentroCusto) throws Exception{
+        if(pCentroCusto < 1){
             return new CentroCusto();
         }
         CentroCustoDAO dao = new CentroCustoDAO();
-        CentroCusto objeto = dao.getCodigo(NumeroCentroCusto);
+        CentroCusto objeto = dao.getCodigo(pCentroCusto);
         dao.fechar();
         return objeto;
     }
+
+    public static String trocarEmail(String x, int y) throws Exception {
+    CentroCustoDAO dao = new CentroCustoDAO();
+      String p = dao.MudarArea(x, y);
+      return p + "Linhas atualiadas";
+    }
+
+    public static String deletarCentroCusto (int codigo) throws Exception {
+
+        if(codigo < 1) {
+            return "Digite um codigo valido.";
+
+        }
+        CentroCustoDAO dao = new CentroCustoDAO();
+        int z = dao.delete(codigo);
+        return z + "Deletado com sucesso.";
+    }
+
+
 }
+
 
