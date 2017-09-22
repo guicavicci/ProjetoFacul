@@ -43,10 +43,11 @@ public class TesteCliente {
 								texto ("Digite o numero da inscricao : "),
 								texto ("Digite a atualizacao cadastral : "),
 								texto ("Digite o debito pendente : "));
-						texto(ClienteBO.editarClientePorCodigo(cliente));				
+										
+						JOptionPane.showMessageDialog(null, "OPA", ClienteBO.editarClientePorCodigo(cliente), JOptionPane.OK_OPTION);
 						break;
 					case "D":
-						texto(ClienteBO.excluirClienteNumero(texto("Digite o numero da inscricao : ")));
+						JOptionPane.showMessageDialog(null, "OPA", ClienteBO.excluirClienteNumero(texto("Digite o numero da inscricao : ")), JOptionPane.OK_OPTION);
 						break;
 					case "E":
 						JOptionPane.showMessageDialog(null, "FALOUS", "FALOUS", JOptionPane.OK_OPTION);
