@@ -10,14 +10,10 @@ public class ClienteBO {
 			return "Excedeu o limite de caracteres.";
 		}
 		
-		
-		cli.getNumeroInstalacao();
 		ClienteDAO dao = new ClienteDAO();
-		Cliente clienteResult = dao.selecionarCliente(cli.getNumeroInstalacao());
-		Integer numInstalacaoCliente = new Integer(clienteResult.getNumeroInstalacao());
+		Cliente clienteResult = consultarCodigo(cli.getNumeroInstalacao());
 		
-		
-		if(numInstalacaoCliente.intValue() > 0){
+		if(clienteResult.getNumeroInstalacao() != null){
 		
 			dao.fechar();
 			return "Este cliente ja existe!";
@@ -26,9 +22,10 @@ public class ClienteBO {
 		dao.fechar();
 		return x; 
 	}
+	
 	public static Cliente consultarCodigo(String numero) throws Exception{
-		if(Integer.parseInt(numero)<1){
-			return new Cliente();
+		if(numero != null && Integer.parseInt(numero)<1){
+			return null;
 		}
 		ClienteDAO dao = new ClienteDAO();
 		Cliente objeto = dao.selecionarCliente(numero);
@@ -36,14 +33,32 @@ public class ClienteBO {
 		return objeto;
 	}
 	
-	public static int excluirClienteNumero (int numero)throws Exception{
-		if(numero<1){
-			return 0;
+	public static String editarClientePorCodigo(Cliente cliente) throws Exception{
+		if(cliente.getNumeroInstalacao() == null && cliente.getNumeroInstalacao().isEmpty()){
+			return null;
 		}
 		ClienteDAO dao = new ClienteDAO();
-		int x = dao.deletarCliente(numero);
+		int sucesso = dao.atualizarCliente(cliente);
 		dao.fechar();
-		return x;
+		if(sucesso == 1){
+			return "Alterado com sucesso";
+		}
+		return "Falha na alteração, tente novamente";
+		
+		
+	}
+	
+	public static String excluirClienteNumero (String numero)throws Exception{
+		if(numero != null && Integer.parseInt(numero)<1){
+			return "ERRO";
+		}
+		ClienteDAO dao = new ClienteDAO();
+		int sucesso = dao.deletarCliente(numero);
+		dao.fechar();
+		if(sucesso == 0){
+			return "Excluído com sucesso !";
+		}
+		return "ERRO";
 	}
 	
 }
