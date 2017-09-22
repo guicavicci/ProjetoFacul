@@ -12,13 +12,6 @@ public class ClienteBO {
 		
 		
 		cli.getNumeroInstalacao();
-		
-		//new Integer - dando parse de String para Integer usando o construtor do Integer.
-		//Integer numInstalacao = new Integer(cli.getNumeroInstalacao());
-		
-		//Devolvendo um int com o método intValue().
-		//numInstalacao.intValue();
-		
 		ClienteDAO dao = new ClienteDAO();
 		Cliente clienteResult = dao.selecionarCliente(cli.getNumeroInstalacao());
 		Integer numInstalacaoCliente = new Integer(clienteResult.getNumeroInstalacao());

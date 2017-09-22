@@ -5,18 +5,16 @@ public class Pessoa {
 	private String nome;
 	private String email;
 	private String telefone;
-	private Endereco endereco;
 	
 	public String getAll() {
-		return id + "\n" + nome + "\n" + email + "\n" + telefone + "\n" + endereco;
+		return id + "\n" + nome + "\n" + email + "\n" + telefone;
 		
 	}
 	
-	public void setAll(int i, String n, String em, String t, Endereco e) {
+	public void setAll(int i, String n, String em, String t) {
 		id =i;
 		email =em;
 		telefone =t;
-		endereco =e;
 		
 		
 	}
@@ -45,24 +43,18 @@ public class Pessoa {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public Endereco getEndereco() {
-		return endereco;
-	}
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
+	
 
 	public Pessoa () {
 		super();
 	}
 
-	public Pessoa(int id, String nome, String email, String telefone, Endereco endereco) {
+	public Pessoa(int id, String nome, String email, String telefone) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.telefone = telefone;
-		this.endereco = endereco;
 	}
 
 

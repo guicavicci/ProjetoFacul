@@ -74,13 +74,13 @@ public class PessoaFisicaDAO {
 	}
 	
 	
-	public int atualizarEmail (String x, int y) throws Exception{
+	public String atualizarEmail (String x, int y) throws Exception{
 		PreparedStatement estrutura = con.prepareStatement
 		("UPDATE Pessoa SET email = ? WHERE NR_CLIENTE =?");
 		estrutura.setString(1,  x);
 		estrutura.setInt(2, y);
 		int z = estrutura.executeUpdate();
-		return z;
+		return "Total de " + z + "Linhas atualizadas";
 	}
 	
 	

@@ -11,8 +11,8 @@ public class PessoaFisica extends Pessoa{
 		
 	}
 	
-	public void setAll(int i, String n, String em, String t, Endereco e, String c, String r, String dn) {
-		super.setAll(i, n, em, t, e);
+	public void setAll(int i, String n, String em, String t, String c, String r, String dn) {
+		super.setAll(i, n, em, t);
 		cpf =c;
 		rg=r;
 		dataNascimento = dn;
@@ -23,9 +23,9 @@ public class PessoaFisica extends Pessoa{
 	public PessoaFisica() {
 		super();
 	}
-	public PessoaFisica(int id, String nome, String email, String telefone, Endereco endereco, String cpf, String rg,
+	public PessoaFisica(int id, String nome, String email, String telefone, String cpf, String rg,
 			String dataNascimento, Pessoa pessoa) {
-		super(id, nome, email, telefone, endereco);
+		super(id, nome, email, telefone);
 		this.cpf = cpf;
 		this.rg = rg;
 		this.dataNascimento = dataNascimento;
