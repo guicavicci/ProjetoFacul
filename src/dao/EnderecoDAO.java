@@ -33,15 +33,15 @@ public EnderecoDAO() throws Exception {
         return "Gravado com sucesso";
     }
     public int delete(String cep) throws Exception {
-        PreparedStatement estrutura = con.prepareStatement ("delete from PESSOAS where cep = ?");
+        PreparedStatement estrutura = con.prepareStatement ("delete from Pessoa where cep = ?");
         estrutura.setString(1, cep);
         int i = estrutura.executeUpdate();
         estrutura.close();
         return i;
     }
     
-    public int atualizarCidade(String cidade, int id) throws Exception {
-        PreparedStatement estrutura = con.prepareStatement("update PESSOA set cidade = ? where id = ?");
+    public int updateCidade(String cidade, int id) throws Exception {
+        PreparedStatement estrutura = con.prepareStatement("update Pessoa set cidade = ? where id = ?");
         estrutura.setString(1, cidade);
         estrutura.setInt(2, id);
         int i = estrutura.executeUpdate();
