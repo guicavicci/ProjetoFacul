@@ -1,75 +1,81 @@
-package bo; 
+package bo;
 
-import beans.Endereco;
 import beans.Fatura;
-import dao.EnderecoDAO;
-import dao.FaturaDAO;
+import dao.FaturaDAO;;
 
-public class FaturaBO {
-	
-	//criando nova fatura - Feito 
-    public static String novaFatura(Fatura fat)throws Exception{
-     
-     FaturaDAO dao = new FaturaDAO();
-
-   	 if (fat.getConsumoKwh() <= 0){
-   		 return "E obrigatorio digitar um valor positivo de consumo!";
-   	 }
-   	 if (fat.getDataVencimento().length()<1) {
-   		 return "A data nao e valida";
-   	 }
-	
-   	 String nf = dao.criar(fat);
-   	 dao.fechar();
-   	 return nf;
-   	
-   	 
-    }
-    
-    // Consultando Fatura - Feito 
-    
-
-    public static Fatura consultarFatura(int numero) throws Exception{
-   	 if(numero < 1){
-   		 return new Fatura();
-   	 }
-   	 FaturaDAO dao = new FaturaDAO();
-   	 Fatura cf = dao.getFatura(numero);
-   	 dao.fechar();
-   	 return cf;
-    }
-    
-    // alterando fatura 
-   
-    
-    public static String alterarFatura(String pgto, int nm) throws Exception {
-        
+public class FaturaBO
+{
+	public static String adicionarNovaFatura(Fatura fatura)throws Exception
+	{
+		if(fatura.getNumeroFatura() > 999999999)
+			return "Numero de caracteres excedido";
+		if(fatura.getNumeroFatura() < 0 )
+			return "A fatura precisa ter um número positivo";
 		
-    	if(nm < 1) {
-    		return "Digite um Numero Valido!";   		
-    	
-    		
-    	}
-    	  FaturaDAO dao = new FaturaDAO();
-    	  String z = dao.atualizarPagamento(pgto, nm);
-    	  return z + "Alterado(s).";
-    	  
-    }
-    
-    
-    //deletando fatura - Feito 
-    
-  public static String deletarFatura (int numero) throws Exception {
-    	
-    	if(numero < 1) {
-    		return "Digite um id valido.";
-    	}
-    	FaturaDAO dao = new FaturaDAO();
-    	int df = dao.delete(numero);
-    	return df + "Deletado com sucesso.";
-    }
-    	
- 
-    
-    
+		FaturaDAO dao = new FaturaDAO();
+		
+		if(dao.getFatura(fatura.getNumeroFatura()).getNumeroFatura()>0)
+		{
+			dao.fechar();
+			return "Este número já existe";
+		}
+		
+		String x = dao.criar(fatura);
+		dao.fechar();
+		return x;
+	}
+	public static Fatura pegarFatura(long numero)throws Exception
+	{
+		if(numero > 999999999)
+			return new Fatura();
+		if(numero < 0 )
+			return new Fatura();
+		
+		FaturaDAO dao = new FaturaDAO();
+		if(dao.getFatura(numero) == null)
+		{
+			dao.fechar();
+			return new Fatura();
+		}
+		Fatura fatura = dao.getFatura(numero);
+		
+		return fatura;
+	}
+	
+	public static String atualizarTaxa(double taxa, long numero)throws Exception
+	{
+		//Hipoteticamente R$100 é a maior taxa por Kw/h e R$5 a menor
+		if(taxa < 5)
+			return "Taxa menor que a permitida";
+		if(taxa > 100)
+			return "Taxa maior que a permitida";
+		FaturaDAO dao = new FaturaDAO();
+		int x = dao.updateTaxa(taxa, numero);
+		dao.fechar();
+		
+		if(x > 0)
+			return x + " linhas foram alteradas!";
+		else
+			return "Nenhuma linha foi alterada";
+	}
+	
+	public static String deletarFatura(long numero)throws Exception
+	{
+		FaturaDAO dao = new FaturaDAO();
+		if(dao.getFatura(numero) == null)
+		{
+			dao.fechar();
+			return "Essa fatura não existe";
+		}
+		
+		int x = dao.delete(numero);
+		dao.fechar();
+		
+		if(x > 0)
+			return x + " linhas foram deletadas!";
+		else
+			return "Nenhuma linha foi deletada";
+	}
 }
+
+
