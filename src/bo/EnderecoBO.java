@@ -1,6 +1,7 @@
 package bo;
 
 import beans.Endereco;
+import beans.Fornecedor;
 import dao.EnderecoDAO;
 import dao.FornecedorDAO;
 
@@ -21,6 +22,18 @@ public class EnderecoBO {
         return x;
     }
 	
+    public static Endereco consultarPorCep(String c) throws Exception{
+        //consultar por CEP
+        if(c.indexOf("@")>0 || c.indexOf("#")>0 || c.indexOf("%")>0 || c.indexOf("&")>0){
+            return new Endereco();
+        }
+        EnderecoDAO dao = new EnderecoDAO();
+        Endereco endereco = dao.selecionarEndereco(c);
+        dao.fechar();
+        return endereco;
+    }
+    
+	
 	  
     public static String mudarCidade(String x, int y) throws Exception {
         //mudar cidade
@@ -36,7 +49,7 @@ public class EnderecoBO {
     }
     
     
-public static String deletarFornecedor (String cep) throws Exception {
+public static String deletarCidade(String cep) throws Exception {
     //deletar cidade
     
     if(cep.indexOf("@")>0 || cep.indexOf("#")>0 || cep.indexOf("%")>0 || cep.indexOf("&")>0) {
