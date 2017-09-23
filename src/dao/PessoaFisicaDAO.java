@@ -76,7 +76,7 @@ public class PessoaFisicaDAO {
 	
 	public String atualizarEmail (String x, int y) throws Exception{
 		PreparedStatement estrutura = con.prepareStatement
-		("UPDATE Pessoa SET email = ? WHERE NR_CLIENTE =?");
+		("UPDATE Pessoa SET email = ? WHERE id =?");
 		estrutura.setString(1,  x);
 		estrutura.setInt(2, y);
 		int z = estrutura.executeUpdate();

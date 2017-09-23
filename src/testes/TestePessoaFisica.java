@@ -25,9 +25,9 @@ public class TestePessoaFisica {
             do{
                 char op =texto
                         ("Escolha uma opção:\n "
-                                + "<G> - Gravar\n "
+                                + "<G> - Gravar PessoaFisica\n "
                                 + "<C> - Consultar\n "
-                                + "<A> - Mudar Area"
+                                + "<A> - Alterar email\n"
                                 + "<D> - Deletar").toUpperCase().charAt(0);
                 if (op=='G'){
                     bo = new PessoaFisicaBO();
@@ -57,7 +57,7 @@ public class TestePessoaFisica {
                     		texto("Digite o email que deseja atualizar:"),
                     		textint ("Digite o id da PessoaFisica"));
                     		              		
-                    System.out.println(p + "campo email atualizado");
+                    System.out.println(p);
 
 
                 }
@@ -67,14 +67,14 @@ public class TestePessoaFisica {
                 	bo = new PessoaFisicaBO();
                 	String d = bo.deletarPessoaFisica(textint
                 			("Digite o id da Pessoa Fisica que deseja deletar:"));
-                	System.out.println(d + "Linhas deletadas.");
+                	System.out.println(d);
                 	
                 }
                 else{
                     System.out.println("Opção inválida!!!");
                 }
             }while(JOptionPane.showConfirmDialog
-                    (null, "Continuar?", "CentroCustoDAO",
+                    (null, "Continuar?", "PessoaFisicaDAO",
                             JOptionPane.YES_NO_OPTION,
                             JOptionPane.QUESTION_MESSAGE)==0);
         }catch(Exception e){

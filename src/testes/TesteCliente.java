@@ -3,63 +3,83 @@ package testes;
 import javax.swing.JOptionPane;
 
 import beans.Cliente;
+import beans.Endereco;
 import bo.ClienteBO;
+import bo.EnderecoBO;
+import bo.ClienteBO;
+import dao.ClienteDAO;
 
 public class TesteCliente {
 	
 	static String texto (String texto) {
 		return JOptionPane.showInputDialog(texto);
+		
 	}
-
-	public static void main(String[] args) {
-		try {
-			String opcao = "XX";
-			while(!opcao.equals("E")){
-				opcao = texto("=======Escolha uma opcao======"
-					+ "\n A - Para Gravar novo Cadastro"
-					+ "\n B - Para Consultar Cadastro"
-					+ "\n C - Para Editar um Cadastro"
-					+ "\n D - Para Excluir um Cadastro"
-					+ "\n E - Sair"
-					+ "");
-				Cliente cliente = new Cliente();
-				switch(opcao.toUpperCase()){
-					case "A":
-						cliente.setAll(
-								texto("Digite a atualizacao cadastral"),
-								texto ("Digite o numero da inscricao:"),
-								texto ("Digite o debito pendente: "));
-						texto(ClienteBO.adicionarCliente(cliente));				
-						break;
-					case "B":
-						String numeroInscricao = texto("Digite o numero da inscricao : ");
-						cliente = ClienteBO.consultarCodigo(numeroInscricao);
-						JOptionPane.showMessageDialog(null, "Numero da instalaÁ„o : " + cliente.getNumeroInstalacao()
-							+ "\nDÈbito Pendente : " + cliente.getDebitoPendente()
-							+ "\nAtualizaÁ„o Cadastral" + cliente.getAtualizacaoCadastral(), "TA AI", JOptionPane.OK_OPTION);
-						break;
-					case "C":
-						cliente.setAll(
-								texto ("Digite o numero da inscricao : "),
-								texto ("Digite a atualizacao cadastral : "),
-								texto ("Digite o debito pendente : "));
-										
-						JOptionPane.showMessageDialog(null, "OPA", ClienteBO.editarClientePorCodigo(cliente), JOptionPane.OK_OPTION);
-						break;
-					case "D":
-						JOptionPane.showMessageDialog(null, "OPA", ClienteBO.excluirClienteNumero(texto("Digite o numero da inscricao : ")), JOptionPane.OK_OPTION);
-						break;
-					case "E":
-						JOptionPane.showMessageDialog(null, "FALOUS", "FALOUS", JOptionPane.OK_OPTION);
-						break;
-					default :
-					JOptionPane.showMessageDialog(null, "SELECIONE UMA OP«√O VALIDA", "OPA", JOptionPane.OK_OPTION);
-				}
-			}
 	
-}catch(Exception e) {
-	e.printStackTrace();
-}
+	static int textint (String textint) {
+		return Integer.parseInt(JOptionPane.showInputDialog(textint));
+		
 	}
 
+    public static void main(String[] args) {
+        ClienteBO bo = null;
+        Cliente cliente = null;
+        try{
+            bo = new ClienteBO();
+            do{
+                char op =texto
+                        ("Escolha uma op√ß√£o:\n "
+                                + "<G> - Gravar Cliente\n "
+                                + "<C> - Consultar\n "
+                                + "<A> - Alterar Cliente\n"
+                                + "<D> - Deletar").toUpperCase().charAt(0);
+                if (op=='G'){
+                	bo = new ClienteBO();
+                    Cliente obj = new Cliente();
+                    obj.setAll(	
+                    		texto("Digite o numero instalacao: "),
+                    		texto("Digite o atualizaca cadastral:"),
+                    		texto("Digite o debito pendente: "));                  		
+                    System.out.println(bo.adicionarCliente(obj));		
+
+                }else if (op=='C'){
+                	//Consultar
+                    bo = new ClienteBO();
+                    String numeroInscricao = texto("Digite o numero da inscricao : ");
+					cliente = ClienteBO.consultarCodigo(numeroInscricao);
+					JOptionPane.showMessageDialog(null, "Numero da instalacao : " + cliente.getNumeroInstalacao()
+						+ "\nDebito Pendente : " + cliente.getDebitoPendente()
+						+ "\nAtualizacao Cadastral" + cliente.getAtualizacaoCadastral(), "TA AI", JOptionPane.OK_OPTION);
+
+                }else if (op=='A'){
+                	cliente.setAll(
+							texto ("Digite o numero da inscricao : "),
+							texto ("Digite a atualizacao cadastral : "),
+							texto ("Digite o debito pendente : "));
+
+                }
+                else if (op == 'D') {
+                	//Deletar
+            	
+                 	String d = bo.excluirClienteNumero(texto
+                			("Digite o numero da instalacao que deseja deletar:"));
+                	System.out.println(d);
+                	
+                }
+                else{
+                    System.out.println("Op√ß√£o inv√°lida!!!");
+                }
+            }while(JOptionPane.showConfirmDialog
+                    (null, "Continuar?", "ClienteDAO",
+                            JOptionPane.YES_NO_OPTION,
+                            JOptionPane.QUESTION_MESSAGE)==0);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
+
 }
+
+

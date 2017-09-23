@@ -64,15 +64,15 @@ public class TesteEndereco {
              	
                 	bo = new EnderecoBO();
                 	String d = bo.deletarCidade(texto
-                			("Digite o cep que deseja deletar:"));
-                	System.out.println(d + "Linhas deletadas.");
+                			("Digite o cep que deseja excluir: "));
+                	System.out.println(d);
                 	
                 }
                 else{
                     System.out.println("Opção inválida!!!");
                 }
             }while(JOptionPane.showConfirmDialog
-                    (null, "Continuar?", "CentroCustoDAO",
+                    (null, "Continuar?", "EnderecoDAO",
                             JOptionPane.YES_NO_OPTION,
                             JOptionPane.QUESTION_MESSAGE)==0);
         }catch(Exception e){

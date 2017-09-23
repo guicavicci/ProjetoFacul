@@ -27,7 +27,7 @@ public class TestePessoaJuridica {
                         ("Escolha uma opção:\n "
                                 + "<G> - Gravar\n "
                                 + "<C> - Consultar\n "
-                                + "<A> - Atualizar Inscricao"
+                                + "<A> - Atualizar Inscricao\n"
                                 + "<D> - Deletar").toUpperCase().charAt(0);
                 if (op=='G'){
                     bo = new PessoaJuridicaBO();
@@ -59,7 +59,7 @@ public class TestePessoaJuridica {
                     		texto("Digite o nova Inscricao: "),
                     		texto ("Digite o cnpj que deseja atualizar a inscricao: "));
                     		              		
-                    System.out.println(p + "Inscricao atualizada!");
+                    System.out.println(p);
 
 
                 }
@@ -69,7 +69,7 @@ public class TestePessoaJuridica {
                 	bo = new PessoaJuridicaBO();
                 	String d = bo.deletarPessoaJuridica(texto
                 			("Digite o cnpj da Pessoa Juridica que deseja deletar:"));
-                	System.out.println(d + "Linhas deletadas.");
+                	System.out.println(d);
                 	
                 }
                 else{

@@ -32,7 +32,7 @@ public class TesteFuncionario {
                         ("Escolha uma opção:\n "
                                 + "<G> - Gravar Funcionario\n "
                                 + "<C> - Consultar\n "
-                                + "<A> - Alterar Salario"
+                                + "<A> - Alterar Salario\n"
                                 + "<D> - Deletar").toUpperCase().charAt(0);
                 if (op=='G'){
                     bo = new FuncionarioBO();
@@ -55,10 +55,10 @@ public class TesteFuncionario {
                 }else if (op=='A'){
                     bo = new FuncionarioBO();
                     String p = bo.aumentarSalario(
-                    		textdoub("Digite o novo salario:"),
+                    		textdoub("Digite quantos % deseja aumentar no salario:"),
                     		texto("Digite o Numero da matricula do funcionario: "));
                     		              		
-                    System.out.println(p + "Salario atualizado.");
+                    System.out.println(p);
 
 
                 }

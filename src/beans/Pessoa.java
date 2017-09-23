@@ -29,7 +29,7 @@ public class Pessoa {
 		return nome;
 	}
 	public void setNome(String nome) {
-		this.nome = nome.toUpperCase();
+		this.nome = nome;
 	}
 	public String getEmail() {
 		return email;
