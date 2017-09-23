@@ -9,82 +9,79 @@ import conexao.ConexaoFactory;
 
 public class FaturaDAO
 {
-    private Connection con;
-    
-    public FaturaDAO(){}
+	private Connection con;
+	
+	public FaturaDAO(){}
 
-    //Construtor (abre conexão)
-    public FaturaDAO(Connection con)throws Exception
-    {
-        con = new ConexaoFactory().conectar();
-    }
-    //Fecha conexão
-    public String fechar()throws Exception
-    {
-        con.close();
-        return "Conexão fechada com sucesso!";
-    }
-    //Criar Fatura
-    public String criar(Fatura Fatura)throws Exception
-    {
-        PreparedStatement estrutura = null;
-        estrutura = con.prepareStatement
-        ("INSERT INTO Fatura"+
-        "(nm_fatura, consumo_kwh,dt_vencimento, pagamento, valor, taxa) VALUES"+
-        "(?,?,?,?,?,?)");
-        estrutura.setInt(1, Fatura.getNumeroFatura());
-        estrutura.setDouble(2, Fatura.getConsumoKwh());
-        estrutura.setString(3, Fatura.getDataVencimento());
-        estrutura.setString(4, Fatura.getFormaPagamento());
-        estrutura.setDouble(5, Fatura.getValor());
-        estrutura.setDouble(6, Fatura.getTaxaKwh());
-        int nm = estrutura.executeUpdate();
-        estrutura.close();
-        return nm + " linha foi criada!";
-    }
-    //Pegar Fatura
-    public Fatura getFatura(int numero) throws Exception
-    {
-        Fatura Fatura = new Fatura();
-        PreparedStatement estrutura = null;
-        estrutura = con.prepareStatement
-        ("SELECT nm_fatura, consumo_kwh, dt_vencimento, pagamento, taxa, valor FROM Fatura WHERE nm_fatura = ?");
-        estrutura.setInt(1, numero);
-        ResultSet resultado = estrutura.executeQuery();
-        if(resultado.next())
-        {
-            Fatura.setNumeroFatura(resultado.getInt("nm_fatura"));
-            Fatura.setConsumoKwh(resultado.getDouble("consumo_kwh"));
-            Fatura.setDataVencimento(resultado.getString("dt_vencimento"));
-            Fatura.setFormaPagamento(resultado.getString("pagamento"));
-            Fatura.setValor(resultado.getDouble("valor"));
-            Fatura.setTaxaKwh(resultado.getDouble("taxa"));
-        }
-        resultado.close();
+	//Construtor (abre conexão)
+	public FaturaDAO(Connection con)throws Exception
+	{
+		con = new ConexaoFactory().conectar();
+	}
+	//Fecha conexão
+	public String fechar()throws Exception
+	{
+		con.close();
+		return "Conexão fechada com sucesso!";
+	}
+	//Criar fatura
+	public String criar(Fatura fatura)throws Exception
+	{
+		PreparedStatement estrutura = null;
+		estrutura = con.prepareStatement
+		("INSERT INTO FATURA"+
+		"(NM_FATURA, CONSUMO_KWH, DT_VENCIMENTO, PAGAMENTO, TAXA, VALOR) VALUES"+
+		"(?,?,?,?,?,?)");
+		estrutura.setLong(1, fatura.getNumeroFatura());
+		estrutura.setDouble(2, fatura.getConsumoKwh());
+		estrutura.setString(3, fatura.getDataVencimento());
+		estrutura.setString(4, fatura.getFormaPagamento());
+		estrutura.setDouble(6, fatura.getValor());
+		estrutura.setDouble(5, fatura.getTaxaKwh());
+		int nm = estrutura.executeUpdate();
 		estrutura.close();
-        return Fatura;
-    }
-    //Deletar Fatura
-    public int delete(int numero)throws Exception
-    {
-        PreparedStatement estrutura = con.prepareStatement
-        ("DELETE FROM Fatura WHERE nm_fatura = ?");
-        estrutura.setInt(1, numero);
-        int i = estrutura.executeUpdate();
-        estrutura.close();
-        return i;
-    }
-    
-    public String atualizarPagamento(String pgto, int nm) throws Exception {
-        PreparedStatement estrutura = con.prepareStatement("update Fatura set pagamento = ? where nm_fatura = ?");
-        estrutura.setString(1, pgto);
-        estrutura.setInt(2, nm);
-        int i = estrutura.executeUpdate();
-        estrutura.close();
-        return i + "ALterado(s).";
-    }
-    
+		return nm + " linha foi criada!";
+	}
+	//Pegar fatura
+	public Fatura getFatura(long numero) throws Exception
+	{
+		Fatura fatura = new Fatura();
+		PreparedStatement estrutura = con.prepareStatement
+		("SELECT * FROM FATURA WHERE NM_FATURA = ?");
+		estrutura.setLong(1, numero);
+		ResultSet resultado = estrutura.executeQuery();
+		if(resultado.next())
+		{
+			fatura.setNumeroFatura(resultado.getInt("NM_FATURA"));
+			fatura.setConsumoKwh(resultado.getDouble("CONSUMO_KWH"));
+			fatura.setDataVencimento(resultado.getString("DT_VENCIMENTO"));
+			fatura.setFormaPagamento(resultado.getString("PAGAMENTO"));
+			fatura.setTaxaKwh(resultado.getDouble("TAXA"));
+			fatura.setValor(resultado.getDouble("VALOR"));
+		}
+		return fatura;
+	}
+	//Deletar fatura
+	public int delete(long numero)throws Exception
+	{
+		PreparedStatement estrutura = con.prepareStatement
+		("DELETE FROM FATURA WHERE NM_FATURA = ?");
+		estrutura.setLong(1, numero);
+		int i = estrutura.executeUpdate();
+		estrutura.close();
+		return i;
+	}
+	public int updateTaxa(double taxa, long numero) throws Exception
+	{
+		PreparedStatement estrutura = con.prepareStatement
+		("UPDATE FATURA SET TAXA = ? WHERE NM_FATURA = ?");
+		estrutura.setDouble(1, taxa);
+		estrutura.setLong(2, numero);
+		int i = estrutura.executeUpdate();
+		estrutura.close();
+		return i;
+	}
+	//CREATE, SELECT, UPDATE, DELETE FEITOS :)))))
 }
 
 
-	
