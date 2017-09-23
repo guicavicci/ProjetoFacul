@@ -7,10 +7,7 @@ import dao.PessoaFisicaDAO;
 public class FuncionarioBO {
 	
     public static String adicionarNovoFuncionario(Funcionario func)throws Exception{
-        if (func.getNome().length()>40){
-            return "Excedeu a quantidade de caracteres";
-        }
-        
+            
         FuncionarioDAO dao = new FuncionarioDAO();
         if (dao.getFuncionario(func.getNumeroMatricula()).getNumeroMatricula()>0) {
         

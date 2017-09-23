@@ -64,8 +64,8 @@ public class TesteEndereco {
              	
                 	bo = new EnderecoBO();
                 	String d = bo.deletarCidade(texto
-                			("Digite o cep que deseja deletar:"));
-                	System.out.println(d + "Linhas deletadas.");
+                			("Digite o cep que deseja excluir: "));
+                	System.out.println(d);
                 	
                 }
                 else{
