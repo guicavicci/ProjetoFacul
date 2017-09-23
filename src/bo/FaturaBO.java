@@ -42,17 +42,17 @@ public class FaturaBO {
     // alterando fatura 
    
     
-    public static String alterarFatura(String x, int y) throws Exception {
+    public static String alterarFatura(String pgto, int nm) throws Exception {
         
 		
     	if(x.length() < 1) {
-    		return "Digite um número de fatura válida!";   		
+    		return "Digite um Vencimento Válido!";   		
     	
     		
     	}
     	  FaturaDAO dao = new FaturaDAO();
-    	  dao.atualizarPagamento(x, y);
-    	  return x + y; 
+    	  dao.atualizarPagamento(pgto, nm);
+    	  return pgto + nm; 
     }
     
     
