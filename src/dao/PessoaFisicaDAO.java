@@ -26,7 +26,7 @@ public class PessoaFisicaDAO {
 	public String gravar(PessoaFisica pf) throws Exception {
 		PreparedStatement estrutura = null;
 		estrutura = con.prepareStatement
-				("INSERT INTO Pessoa (id, nome, email, telefone, cpf, rg, dataNascimento) VALUES(?,?,?,?,?,?,?)");
+				("INSERT INTO Pessoa (id, nome, email, telefone, cpf, rg, data_nascimento) VALUES(?,?,?,?,?,?,?)");
 		estrutura.setInt (1,pf.getId());
 		estrutura.setString (2,pf.getNome());
 		estrutura.setString (3,pf.getEmail());

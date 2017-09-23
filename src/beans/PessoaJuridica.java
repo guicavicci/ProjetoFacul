@@ -14,6 +14,16 @@ public class PessoaJuridica extends Pessoa{
 			
 		}
 		
+		public void setAll (int i, String n, String em, String t, String nc, String rs, String c, String ie) {
+			super.setAll(i, nc, em, t);
+			numeroContrato =nc;
+			razaoSocial=rs;
+			cnpj=c;
+			inscricaoEstadual =ie;
+			
+			
+		}
+		
 		public PessoaJuridica() {
 			super();
 		}

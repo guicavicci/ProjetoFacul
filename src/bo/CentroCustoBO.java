@@ -37,6 +37,10 @@ public class CentroCustoBO {
     }
 
     public static String TrocarArea(String x, int y) throws Exception {
+    if (x.indexOf("*") > 0 || x.indexOf("%") > 0) {
+    	return "Invalido!";
+    	
+    }
     CentroCustoDAO dao = new CentroCustoDAO();
       int p = dao.mudarArea(x, y);
       return p + "Linhas atualiadas";

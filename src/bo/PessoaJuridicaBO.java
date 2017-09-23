@@ -5,13 +5,7 @@ import dao.PessoaJuridicaDAO;
 
 public class PessoaJuridicaBO {
 	
-	public static String fecharConexao () throws Exception {
-		PessoaJuridicaDAO dao = new PessoaJuridicaDAO ();
-		dao.fechar();
-		return "Conexão Fechada";
-		
-		
-	}
+
     public static String adicionarNovoPJ(PessoaJuridica pj)throws Exception{
     	//add novo pj
         if (pj.getRazaoSocial().length() < 5){
@@ -57,7 +51,7 @@ public class PessoaJuridicaBO {
     public static String deletarPessoaJuridica (String id) throws Exception {
     	//deletar pj
     	
-    	if(id.length() < 0) {
+    	if(id.length() < 1) {
     		return "Digite um id valido.";
     		
     	}

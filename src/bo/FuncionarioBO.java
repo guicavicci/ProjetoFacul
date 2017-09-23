@@ -35,8 +35,8 @@ public class FuncionarioBO {
     public static String aumentarSalario(double s, String nm) throws Exception {
         
 		
-    	if(nm.length()<0) {
-    		return "Este funcionario não existe!";   		
+    	if(nm.length()<1) {
+    		return "Digite um valor valido!";   		
     	
     	}
     	  FuncionarioDAO dao = new FuncionarioDAO();
