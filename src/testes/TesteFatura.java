@@ -1,91 +1,81 @@
-44package testes;
+package testes;
 
 import javax.swing.JOptionPane;
 
 import beans.Fatura;
 import bo.FaturaBO;
+import dao.FaturaDAO;
 
-public class TesteFatura {
-	static String texto (String texto) {
-		return JOptionPane.showInputDialog(texto);
-		
+public class TesteFatura
+{
+	public static void main(String[] args)
+	{
+		FaturaDAO dao = null;
+	    try
+	    {
+	    	dao = new FaturaDAO();
+	        do
+	        {
+	        	char op =JOptionPane.showInputDialog
+	             	("Escolha uma opção:\n "
+	                 	+ "<G> - Criar fatura\n "
+	                 	+ "<R> - Remover fatura\n "
+	                 	+ "<A> - Atualizar taxa de fatura\n "
+	                 	+ "<P> - Pesquisar fatura").toUpperCase().charAt(0);
+	        	
+	            if (op=='G')
+	            {
+	            	//o valor é a taxa vezes o consumo
+	            	FaturaBO.adicionarNovaFatura
+	            	(new Fatura
+	            		(
+	            		Long.parseLong(JOptionPane.showInputDialog("Insira o numero da fautra")),
+	            		Double.parseDouble(JOptionPane.showInputDialog("Insira o consumo em Kw/h")),
+	            		JOptionPane.showInputDialog("Insira a data de vencimento (dd/mm/yyyy)"),
+	            		JOptionPane.showInputDialog("Insira o tipo de pagamento"),
+	            		Double.parseDouble(JOptionPane.showInputDialog("Insira a taxa por kw/h"))
+	            		)
+	            	);
+	            }
+	            else if (op=='P')
+	            {
+	                FaturaBO.pegarFatura(Long.parseLong(JOptionPane.showInputDialog("Insira o numero da fatura a ser pesquisada")));
+	            }
+	            else if (op=='R')
+	            {
+	                FaturaBO.deletarFatura(Long.parseLong(JOptionPane.showInputDialog("Insira o numero da fatura a ser deletada")));
+	            }
+	            else if (op=='A')
+	            {
+	                FaturaBO.atualizarTaxa(Double.parseDouble(JOptionPane.showInputDialog("Insira a taxa")),
+	                		Long.parseLong("Insira o numero de fatura que a taxa vai ser atualizada"));
+	            }
+	            else
+	            {
+	            	System.out.println("Opção inválida!!!");
+	            }
+	        }
+	        while(JOptionPane.showConfirmDialog
+	                 	(null, "Continuar?", "ProdutoDAO",
+	                 	JOptionPane.YES_NO_OPTION,
+	                 	JOptionPane.QUESTION_MESSAGE)==0);
+	    }
+	    catch(Exception e)
+	    {
+	    	e.printStackTrace();
+	    }
+	    finally
+	    {
+	    	try
+	    	{
+	    		dao.fechar();
+	        }
+	    	catch(Exception e)
+	    	{
+	    		e.printStackTrace();
+	        }
+	    }
 	}
-	
-	static int textint (String textint) {
-		return Integer.parseInt(JOptionPane.showInputDialog(textint));
-		
-	}
-	
-	static double textdoub (String textdoub) {
-		return Integer.parseInt(JOptionPane.showInputDialog(textdoub));
-		
-	}
-
-    public static void main(String[] args) {
-        FaturaBO bo = null;
-        try{
-            bo = new FaturaBO();
-            do{
-                char op =texto
-                        ("Escolha uma opção:\n "
-                                + "<G> - Gravar Fatura\n "
-                                + "<C> - Consultar Fatura\n "
-                                + "<A> - Alterar Fatura\n"
-                                + "<D> - Deletar Fatura").toUpperCase().charAt(0);
-                if (op=='G'){
-                    bo = new FaturaBO();
-                    Fatura nf = new Fatura();
-                    nf.setAll(
-                    		textint("Digite o numero da fatura:"), 
-                    		textdoub("Digite o consumo realizado em KW/H:"), 
-                    		texto("Digite a data de vencimento da fatura:"), 
-                    		texto("Digite a forma de pagamento: "), 
-                    		textdoub("Digite o valor da fatura: "), 
-                    		textdoub("Digite a taxa em KW/h:"));
-                    System.out.println(bo.novaFatura(nf));
-
-                }else if (op=='C'){
-                	//Consultar
-                    bo = new FaturaBO();
-                    Fatura cf = bo.consultarFatura(textint("Digite o n�mero da fatura:"));
-                    
-                    System.out.println("N�mero da Fatura: " + cf.getNumeroFatura());
-                    System.out.println("Consumo em Kw/h: " + cf.getConsumoKwh());
-                    System.out.println("Data de Vencimento:" + cf.getDataVencimento());
-                    System.out.println("Forma de Pagamento:" + cf.getFormaPagamento());
-                    System.out.println("Valor da fatura:" + cf.getValor());
-                    System.out.println("Taxa do Kw/h:" + cf.getTaxaKwh());
-                    	
-                }else if (op=='A'){
-                    // alterar fatura
-                	bo = new FaturaBO();
-                    String af = bo.alterarFatura(texto("Digite o numero da data de vencimento:"), 
-                    		textint("Digite o numero da fatura:"));
-                    		              		
-                    System.out.println(af + "Vencimento atualizado.");
-
-
-                }
-                else if (op == 'D') {
-                	//Deletar
-             	
-                	bo = new FaturaBO();
-                	String df = bo.deletarFatura(textint("Digite o Numero da Fatura que deseja deletar: "));
-                	System.out.println(df + "Fatura deletada.");
-                	
-                }
-                else{
-                    System.out.println("Opcao inv�lida!!!");
-                }
-            }while(JOptionPane.showConfirmDialog
-                    (null, "Continuar?", "CentroCustoDAO",
-                            JOptionPane.YES_NO_OPTION,
-                            JOptionPane.QUESTION_MESSAGE)==0);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-
-
-    }
-
 }
+
+
