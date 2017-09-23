@@ -27,7 +27,7 @@ public class TesteFornecedor {
                         ("Escolha uma opção:\n "
                                 + "<G> - Gravar Fornecedor\n "
                                 + "<C> - Consultar\n "
-                                + "<A> - Alterar Gerente"
+                                + "<A> - Alterar Gerente\n"
                                 + "<D> - Deletar").toUpperCase().charAt(0);
                 if (op=='G'){
                     bo = new FornecedorBO();
@@ -70,7 +70,7 @@ public class TesteFornecedor {
                     System.out.println("Opção inválida!!!");
                 }
             }while(JOptionPane.showConfirmDialog
-                    (null, "Continuar?", "CentroCustoDAO",
+                    (null, "Continuar?", "FornecedorBO",
                             JOptionPane.YES_NO_OPTION,
                             JOptionPane.QUESTION_MESSAGE)==0);
         }catch(Exception e){

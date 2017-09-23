@@ -12,13 +12,7 @@ public class FornecedorBO {
         }
         
         FornecedorDAO dao = new FornecedorDAO();
-        Fornecedor fo = new Fornecedor();
-        int z = fo.getId();
-        if (z > 0){
-            dao.fechar();
-            return "Este número já existe";
-        }
-        String x = dao.adcFornecedor(fo);
+        String x = dao.adcFornecedor(f);
         dao.fechar();
         return x;
     }

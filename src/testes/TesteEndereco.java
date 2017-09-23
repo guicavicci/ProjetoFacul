@@ -72,7 +72,7 @@ public class TesteEndereco {
                     System.out.println("Opção inválida!!!");
                 }
             }while(JOptionPane.showConfirmDialog
-                    (null, "Continuar?", "CentroCustoDAO",
+                    (null, "Continuar?", "EnderecoDAO",
                             JOptionPane.YES_NO_OPTION,
                             JOptionPane.QUESTION_MESSAGE)==0);
         }catch(Exception e){
