@@ -46,8 +46,9 @@ public class FaturaDAO
     public Fatura getFatura(int numero) throws Exception
     {
         Fatura Fatura = new Fatura();
-        PreparedStatement estrutura = con.prepareStatement
-        ("SELECT * FROM Fatura WHERE nm_fatura = ?");
+        PreparedStatement estrutura = null;
+        estrutura = con.prepareStatement
+        ("SELECT nm_fatura, consumo_kwh, dt_vencimento, pagamento, taxa, valor FROM Fatura WHERE nm_fatura = ?");
         estrutura.setInt(1, numero);
         ResultSet resultado = estrutura.executeQuery();
         if(resultado.next())
@@ -59,6 +60,8 @@ public class FaturaDAO
             Fatura.setValor(resultado.getDouble("valor"));
             Fatura.setTaxaKwh(resultado.getDouble("taxa"));
         }
+        resultado.close();
+		estrutura.close();
         return Fatura;
     }
     //Deletar Fatura

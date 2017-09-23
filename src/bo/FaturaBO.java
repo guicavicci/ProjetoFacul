@@ -1,5 +1,6 @@
 package bo; 
 
+import beans.Endereco;
 import beans.Fatura;
 import dao.EnderecoDAO;
 import dao.FaturaDAO;
@@ -10,20 +11,18 @@ public class FaturaBO {
     public static String novaFatura(Fatura fat)throws Exception{
      
      FaturaDAO dao = new FaturaDAO();
-   	 if (dao.getFatura(fat.getNumeroFatura()).getNumeroFatura()>0){
-   		 dao.fechar();
-   		 return "Esse n�mero j� existe!";
-   	 }
+
    	 if (fat.getConsumoKwh() <= 0){
-   		 return "� obrigat�rio digitar um valor positivo de consumo!";
+   		 return "E obrigatorio digitar um valor positivo de consumo!";
    	 }
    	 if (fat.getDataVencimento().length()<1) {
-   		 return "A data n�o � v�lida";
+   		 return "A data nao e valida";
    	 }
 	
    	 String nf = dao.criar(fat);
    	 dao.fechar();
    	 return nf;
+   	
    	 
     }
     

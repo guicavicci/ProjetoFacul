@@ -46,7 +46,7 @@ public class TesteFuncionario {
                 }else if (op=='C'){
                 	//Consultar
                     bo = new FuncionarioBO();
-                    Funcionario func = bo.consultarPorMatricula(textint("Digite o id da Funcionario:"));
+                    Funcionario func = bo.consultarPorMatricula(textint("Digite a matricula do Funcionario:"));
                     
                     System.out.println("Numero da matricula: " + func.getNumeroMatricula());
                     System.out.println("Cargo: " + func.getCargo());
