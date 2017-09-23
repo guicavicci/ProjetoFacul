@@ -5,12 +5,6 @@ import dao.FornecedorDAO;
 
 public class FornecedorBO {
     
-    public static String fecharConexao () throws Exception {
-        FornecedorDAO dao = new FornecedorDAO ();
-        dao.fechar();
-        return "Conexão Fechada";
-    }
-    
     public static String adicionarNovoFornecedor(Fornecedor f)throws Exception{
         //add novo fornecedor
         if (f.getNumeroContrato().length() < 0){
