@@ -46,14 +46,14 @@ public class TestePessoaJuridica {
                 }else if (op=='C'){
                 	//Consultar
                     bo = new PessoaJuridicaBO();
-                    PessoaJuridica pj = bo.consultarPorCnpj(texto("Digite o id da PessoaJuridica:"));
+                    PessoaJuridica pj = bo.consultarPorId(textint("Digite o id da PessoaJuridica:"));
                     
                     System.out.println("Numero do contrato: " + pj.getNumeroContrato());
                     System.out.println("Razao social: " + pj.getRazaoSocial());
                     System.out.println("CNPJ: " + pj.getCnpj());
                     System.out.println("Inscricao estadual" + pj.getInscricaoEstadual());
 
-                }else if (op=='A'){
+                }else if (op=='A'){	
                     bo = new PessoaJuridicaBO();
                     String p = bo.mudarInscricao(
                     		texto("Digite o nova Inscricao: "),

@@ -24,11 +24,8 @@ public class PessoaJuridicaBO {
         return x;
     }
 
-    public static PessoaJuridica consultarPorCnpj(String c) throws Exception{
-    	//consultar por cnpj
-    	if(c.indexOf("@")>0 || c.indexOf("#")>0 || c.indexOf("%")>0 || c.indexOf("&")>0){
-            return new PessoaJuridica();
-        }
+    public static PessoaJuridica consultarPorId(int c) throws Exception{
+    	//consultar por id
         PessoaJuridicaDAO dao = new PessoaJuridicaDAO();
         PessoaJuridica objeto = dao.getPessoaJuridica(c);
         dao.fechar();
