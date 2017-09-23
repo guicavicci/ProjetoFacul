@@ -53,7 +53,7 @@ public class TesteFornecedor {
                     		texto("Digite o nome do novo gerente:"),
                     		texto ("Digite o numero do contrato que irá ter o gerente alterado:"));
                     		              		
-                    System.out.println(p + "gerente atualizado");
+                    System.out.println(p);
 
 
                 }
@@ -63,7 +63,7 @@ public class TesteFornecedor {
                 	bo = new FornecedorBO();
                 	String d = bo.deletarFornecedor(texto
                 			("Digite o numero de contrato do fornecedor que deseja deletar:"));
-                	System.out.println(d + "Linhas deletadas.");
+                	System.out.println(d);
                 	
                 }
                 else{

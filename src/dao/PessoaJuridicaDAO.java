@@ -48,7 +48,7 @@ public class PessoaJuridicaDAO {
 			PessoaJuridica pj = new PessoaJuridica();
 			PreparedStatement estrutura = null;
 			estrutura = con.prepareStatement
-					("SELECT nome,email,telefone,numero_contrato,razao_social_cnpj,inscricao_estadual FROM Pessoa WHERE cnpj = ?");
+					("SELECT nome,email,telefone,numero_contrato,razao_social, cnpj,inscricao_estadual FROM Pessoa WHERE cnpj = ?");
 			estrutura.setString (1,n);
 			ResultSet resultado = estrutura.executeQuery();							
 			if(resultado.next()) {

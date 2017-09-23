@@ -1,6 +1,7 @@
 package bo; 
 
 import beans.Fatura;
+import dao.EnderecoDAO;
 import dao.FaturaDAO;
 
 public class FaturaBO {
@@ -11,13 +12,13 @@ public class FaturaBO {
      FaturaDAO dao = new FaturaDAO();
    	 if (dao.getFatura(fat.getNumeroFatura()).getNumeroFatura()>0){
    		 dao.fechar();
-   		 return "Esse número já existe!";
+   		 return "Esse nï¿½mero jï¿½ existe!";
    	 }
    	 if (fat.getConsumoKwh() <= 0){
-   		 return "É obrigatório digitar um valor positivo de consumo!";
+   		 return "ï¿½ obrigatï¿½rio digitar um valor positivo de consumo!";
    	 }
    	 if (fat.getDataVencimento().length()<1) {
-   		 return "A data não é válida";
+   		 return "A data nï¿½o ï¿½ vï¿½lida";
    	 }
 	
    	 String nf = dao.criar(fat);
@@ -45,14 +46,15 @@ public class FaturaBO {
     public static String alterarFatura(String pgto, int nm) throws Exception {
         
 		
-    	if(x.length() < 1) {
-    		return "Digite um Vencimento Válido!";   		
+    	if(nm < 1) {
+    		return "Digite um Numero Valido!";   		
     	
     		
     	}
     	  FaturaDAO dao = new FaturaDAO();
-    	  dao.atualizarPagamento(pgto, nm);
-    	  return pgto + nm; 
+    	  String z = dao.atualizarPagamento(pgto, nm);
+    	  return z + "Alterado(s).";
+    	  
     }
     
     

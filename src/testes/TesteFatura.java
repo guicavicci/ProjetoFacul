@@ -28,28 +28,28 @@ public class TesteFatura {
             do{
                 char op =texto
                         ("Escolha uma opÃ§Ã£o:\n "
-                                + "<G> - Criar Fatura\n "
+                                + "<G> - Gravar Fatura\n "
                                 + "<C> - Consultar Fatura\n "
-                                + "<A> - Alterar Fatura"
+                                + "<A> - Alterar Fatura\n"
                                 + "<D> - Deletar Fatura").toUpperCase().charAt(0);
                 if (op=='G'){
                     bo = new FaturaBO();
                     Fatura nf = new Fatura();
                     nf.setAll(
                     		textint("Digite o numero da fatura:"), 
-                    		textint("Digite o consumo realizado em KW/H:"), 
-                    		textint("Digite a data de vencimento da fatura:"), 
+                    		textdoub("Digite o consumo realizado em KW/H:"), 
+                    		texto("Digite a data de vencimento da fatura:"), 
                     		texto("Digite a forma de pagamento: "), 
                     		textdoub("Digite o valor da fatura: "), 
-                    		textdoub("Digite a taxa em KW/h:"));;
+                    		textdoub("Digite a taxa em KW/h:"));
                     System.out.println(bo.novaFatura(nf));
 
                 }else if (op=='C'){
                 	//Consultar
                     bo = new FaturaBO();
-                    Fatura cf = bo.consultarFatura(textint("Digite o número da fatura:"));
+                    Fatura cf = bo.consultarFatura(textint("Digite o nï¿½mero da fatura:"));
                     
-                    System.out.println("Número da Fatura: " + cf.getNumeroFatura());
+                    System.out.println("Nï¿½mero da Fatura: " + cf.getNumeroFatura());
                     System.out.println("Consumo em Kw/h: " + cf.getConsumoKwh());
                     System.out.println("Data de Vencimento:" + cf.getDataVencimento());
                     System.out.println("Forma de Pagamento:" + cf.getFormaPagamento());
@@ -59,8 +59,8 @@ public class TesteFatura {
                 }else if (op=='A'){
                     // alterar fatura
                 	bo = new FaturaBO();
-                    String af = bo.alterarFatura(textint("Digite o número da data de vencimento:"), 
-                    		textint("Digite o número da fatura:"));
+                    String af = bo.alterarFatura(texto("Digite o numero da data de vencimento:"), 
+                    		textint("Digite o numero da fatura:"));
                     		              		
                     System.out.println(af + "Vencimento atualizado.");
 
@@ -75,7 +75,7 @@ public class TesteFatura {
                 	
                 }
                 else{
-                    System.out.println("Opcao inválida!!!");
+                    System.out.println("Opcao invï¿½lida!!!");
                 }
             }while(JOptionPane.showConfirmDialog
                     (null, "Continuar?", "CentroCustoDAO",
