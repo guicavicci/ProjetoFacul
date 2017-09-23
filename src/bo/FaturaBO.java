@@ -1,6 +1,74 @@
-package bo;
+package bo; 
+
+import beans.Fatura;
+import dao.FaturaDAO;
 
 public class FaturaBO {
- //teste de commit
 	
+	//criando nova fatura - Feito 
+    public static String novaFatura(Fatura fat)throws Exception{
+     
+     FaturaDAO dao = new FaturaDAO();
+   	 if (dao.getFatura(fat.getNumeroFatura()).getNumeroFatura()>0){
+   		 dao.fechar();
+   		 return "Esse número já existe!";
+   	 }
+   	 if (fat.getConsumoKwh() <= 0){
+   		 return "É obrigatório digitar um valor positivo de consumo!";
+   	 }
+   	 if (fat.getDataVencimento().length()<1) {
+   		 return "A data não é válida";
+   	 }
+	
+   	 String nf = dao.criar(fat);
+   	 dao.fechar();
+   	 return nf;
+   	 
+    }
+    
+    // Consultando Fatura - Feito 
+    
+
+    public static Fatura consultarFatura(int numero) throws Exception{
+   	 if(numero < 1){
+   		 return new Fatura();
+   	 }
+   	 FaturaDAO dao = new FaturaDAO();
+   	 Fatura cf = dao.getFatura(numero);
+   	 dao.fechar();
+   	 return cf;
+    }
+    
+    // alterando fatura 
+   
+    
+    public static String alterarFatura(String x, int y) throws Exception {
+        
+		
+    	if(x.length() < 1) {
+    		return "Digite um número de fatura válida!";   		
+    	
+    		
+    	}
+    	  FaturaDAO dao = new FaturaDAO();
+    	  dao.atualizarPagamento(x, y);
+    	  return x + y; 
+    }
+    
+    
+    //deletando fatura - Feito 
+    
+  public static String deletarFatura (int numero) throws Exception {
+    	
+    	if(numero < 1) {
+    		return "Digite um id valido.";
+    	}
+    	FaturaDAO dao = new FaturaDAO();
+    	int df = dao.delete(numero);
+    	return df + "Deletado com sucesso.";
+    }
+    	
+ 
+    
+    
 }
