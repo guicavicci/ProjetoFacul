@@ -27,7 +27,7 @@ public class TesteEndereco {
                         ("Escolha uma opção:\n "
                                 + "<G> - Gravar Endereco\n "
                                 + "<C> - Consultar\n "
-                                + "<A> - Mudar Cidade"
+                                + "<A> - Mudar Cidade\n"
                                 + "<D> - Deletar").toUpperCase().charAt(0);
                 if (op=='G'){
                     bo = new EnderecoBO();
@@ -42,7 +42,7 @@ public class TesteEndereco {
                 }else if (op=='C'){
                 	//Consultar
                     bo = new EnderecoBO();
-                    Endereco end = bo.consultarPorCep(texto("Digite o id do Endereco:"));
+                    Endereco end = bo.consultarPorCep(texto("Digite o cep do Endereco:"));
                     
                     System.out.println("CEP: " + end.getCep());
                     System.out.println("Rua: " + end.getRua());
@@ -53,7 +53,7 @@ public class TesteEndereco {
                     bo = new EnderecoBO();
                     String end = bo.mudarCidade(
                     		texto("Digite a nova cidade: "),
-                    		textint ("Digite o id da pessoa que terá a cidade alterada: "));
+                    		texto ("Digite o cep que terá a cidade alterada: "));
                     		              		
                     System.out.println(end + "campo email atualizado");
 

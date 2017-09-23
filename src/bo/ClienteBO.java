@@ -43,20 +43,20 @@ public class ClienteBO {
 		if(sucesso == 1){
 			return "Alterado com sucesso";
 		}
-		return "Falha na alteração, tente novamente";
+		return "Falha na alteraï¿½ï¿½o, tente novamente";
 		
 		
 	}
 	
 	public static String excluirClienteNumero (String numero)throws Exception{
 		if(numero != null && Integer.parseInt(numero)<1){
-			return "ERRO";
+			return "Excluido";
 		}
 		ClienteDAO dao = new ClienteDAO();
 		int sucesso = dao.deletarCliente(numero);
 		dao.fechar();
 		if(sucesso == 0){
-			return "Excluído com sucesso !";
+			return "Excluï¿½do com sucesso !";
 		}
 		return "ERRO";
 	}

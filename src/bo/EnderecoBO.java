@@ -13,10 +13,6 @@ public class EnderecoBO {
         }
         
         EnderecoDAO dao = new EnderecoDAO();
-        if (dao.selecionarEndereco(end.getRua()).getRua().length()>0){
-            dao.fechar();
-            return "Este número já existe";
-        }
         String x = dao.gravar(end);
         dao.fechar();
         return x;
@@ -35,7 +31,7 @@ public class EnderecoBO {
     
 	
 	  
-    public static String mudarCidade(String x, int y) throws Exception {
+    public static String mudarCidade(String x, String y) throws Exception {
         //mudar cidade
         
     
@@ -44,7 +40,7 @@ public class EnderecoBO {
         
         }
           EnderecoDAO dao = new EnderecoDAO();
-          int p = dao.updateCidade (x, y);
+          String p = dao.updateCidade (x, y);
           return p + "Cidade(s) atualizada(s)";
     }
     

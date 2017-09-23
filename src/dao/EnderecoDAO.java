@@ -40,13 +40,13 @@ public EnderecoDAO() throws Exception {
         return i;
     }
     
-    public int updateCidade(String cidade, int id) throws Exception {
-        PreparedStatement estrutura = con.prepareStatement("update Pessoa set cidade = ? where id = ?");
+    public String updateCidade(String cidade, String c) throws Exception {
+        PreparedStatement estrutura = con.prepareStatement("update Pessoa set cidade = ? where cep = ?");
         estrutura.setString(1, cidade);
-        estrutura.setInt(2, id);
+        estrutura.setString(2, c);
         int i = estrutura.executeUpdate();
         estrutura.close();
-        return i;
+        return i + "linhas atualizadas"; 
     }
     
     public Endereco selecionarEndereco(String cep) throws Exception{
