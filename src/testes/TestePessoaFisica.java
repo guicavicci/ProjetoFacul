@@ -6,6 +6,8 @@ import beans.PessoaFisica;
 import bo.PessoaFisicaBO;
 import dao.PessoaFisicaDAO;
 
+
+//Teste merge
 public class TestePessoaFisica {
 	
 	static String texto (String texto) {
